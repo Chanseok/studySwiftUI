@@ -25,6 +25,17 @@ struct ContentView: View {
                         }
                     }
                 }
+                
+                Section(header: Text("How much tip do you want to leave?")){
+                    
+                    Picker("Tip percentage", selection: $tipPercentage) {
+                        ForEach(0..<tipPercentages.count){
+                            Text("\(self.tipPercentages[$0])%")
+                        }
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
+                }.textCase(.none)
+                
                 Section{
                     Text("$" + checkAmount)
                 }

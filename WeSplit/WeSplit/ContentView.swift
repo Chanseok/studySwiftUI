@@ -9,9 +9,21 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var checkAmount = ""
-    @State private var numberOfPeople = 2
+    @State private var numberOfPeople = 1
     @State private var tipPercentage  = 2
     let tipPercentages = [10, 15, 20, 25, 0]
+    
+    var totalPerPerson : Double {
+        let peopleCount = Double(numberOfPeople) + 2
+        let tipSelected = Double(tipPercentages[tipPercentage])
+        let orderAmount = Double(checkAmount) ?? 0
+        
+        let tipValue = orderAmount / 100 * tipSelected
+        let grandTotal = orderAmount + tipValue
+        let amountPerPerson = grandTotal / peopleCount
+        
+        return amountPerPerson
+    }
     
     var body: some View {
         NavigationView{
@@ -19,6 +31,9 @@ struct ContentView: View {
                 Section{
                     TextField("Amount", text: $checkAmount)
                         .keyboardType(.decimalPad)
+                        .onTapGesture {
+                            self.hideKeyboard()
+                        }
                     Picker("Number of people", selection: $numberOfPeople) {
                         ForEach(2..<100){
                             Text("\($0) of people")
@@ -34,10 +49,11 @@ struct ContentView: View {
                         }
                     }
                     .pickerStyle(SegmentedPickerStyle())
-                }.textCase(.none)
+                }
+                .textCase(.none)
                 
                 Section{
-                    Text("$" + checkAmount)
+                    Text("$\(totalPerPerson, specifier: "%.2f")")
                 }
             }
             .navigationBarTitle("WeSplit")
@@ -51,6 +67,16 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+
+// extension for keyboard dismissing
+// refer to https://www.hackingwithswift.com/quick-start/swiftui/how-to-dismiss-the-keyboard-for-a-textfield
+#if canImport(UIKit)
+extension View {
+    func hideKeyboard(){
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
+#endif
 
 // Memo: What I learned
 //

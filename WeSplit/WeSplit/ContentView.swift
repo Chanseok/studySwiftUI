@@ -45,3 +45,4 @@ struct ContentView_Previews: PreviewProvider {
 //
 // 1. Simulator에서 맥 키보드 대신에 Device의 키보드를 보이게하기 (⇧⌘K) I/O > Keyboard > Connect Hardware Keyboard를 Uncheck
 // 2. Picker를 NavigationView로 감싸니 그제서야 동작을 하는군요
+// 3. [맥 활용] Finder에서 숨김 파일 보기: ⇧⌘.

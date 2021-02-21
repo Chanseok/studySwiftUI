@@ -9,9 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     
-    // github PAT으로 갱신하기 위한 dummy action
-    // github PAT으로 갱신하기 위한 dummy action
-    
+    // github PAT으로 갱신하기 위한 dummy action    
     
     @State private var checkAmount = ""
     @State private var numberOfPeople = 1
